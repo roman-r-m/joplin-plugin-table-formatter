@@ -1,5 +1,5 @@
 import joplin from 'api';
-import { ContentScriptType } from 'api/types';
+import { ContentScriptType, MenuItemLocation } from 'api/types';
 
 joplin.plugins.register({
 	onStart: async function() {
@@ -11,5 +11,6 @@ joplin.plugins.register({
 				await joplin.commands.execute('editor.execCommand', { name: 'formatTable', });
 			}
 		});
+		joplin.views.menuItems.create("Format Table", "formatTable", MenuItemLocation.Edit);
 	},
 });

@@ -4,7 +4,8 @@
   "scripts": {
     "dist": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
     "prepare": "npm run dist",
-    "update": "npm install -g generator-joplin && yo joplin --update"
+    "update": "npm install -g generator-joplin && yo joplin --update",
+    "test": "jest"    
   },
   "license": "MIT",
   "keywords": [
@@ -12,13 +13,16 @@
   ],
   "devDependencies": {
     "@types/codemirror": "^0.0.108",
-    "@types/node": "^14.0.14",
+    "@types/jest": "^26.0.20",
+    "@types/node": "^14.14.32",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^6.1.0",
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
+    "jest": "^26.6.3",
     "on-build-webpack": "^0.1.0",
     "tar": "^6.0.5",
+    "ts-jest": "^26.5.3",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.3",
     "webpack": "^4.43.0",
