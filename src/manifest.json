@@ -1,0 +1,12 @@
+{
+	"manifest_version": 1,
+	"id": "net.rmusin.joplin-table-format",
+	"app_min_version": "1.7",
+	"version": "1.0.0",
+	"name": "Table Formatter Plugin",
+	"description": "Format Makdown Tables",
+	"author": "Roman Musin",
+	"homepage_url": "",
+	"repository_url": "",
+	"keywords": []
+}
