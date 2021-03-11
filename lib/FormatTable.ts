@@ -3,12 +3,19 @@ export default function formatTable(numLines: number, getLine: (number) => strin
     const columnWidths = [];
 
     for (let i = 0; i < numLines; i++) {
-        if (i === 1) continue;
-
         const line: string = getLine(i).trim();
-        // split into columns, \| is escape
-        let cols = line.split(/[^/]?\|/);
-        console.log(cols);
+        let prev = 0;
+        let cols = [];
+        for (let j = 0; j < line.length; j++) {
+            if (line.charAt(j) === '|' && (j == 0 || line.charAt(j - 1) !== '\\')) {
+                cols.push(line.substring(prev, j));
+                prev = j + 1;
+            }
+            if (j === line.length - 1) {
+                cols.push(line.substring(prev, j));
+            }
+        }
+        
         cols = cols.slice(1, cols.length - 1);
         table.push(cols.map(c => c.trim()));
         for (let j = 0; j < cols.length; j++) {
@@ -20,24 +27,21 @@ export default function formatTable(numLines: number, getLine: (number) => strin
         }
     }
 
-    console.log(table);
-    console.log(columnWidths);
-
     for (let row = 0; row < table.length; row++) {
         for (let col = 0; col < columnWidths.length; col++) {
+            const fillChar = row === 1 ? '-' : ' ';
             if (col >= table[row].length) {
-                table[row].push(' '.repeat(columnWidths[col]))
+                table[row].push(fillChar.repeat(columnWidths[col]))
             } else {
-                table[row][col] = (table[row][col] as string).padEnd(columnWidths[col]);
+                table[row][col] = (table[row][col] as string).padEnd(columnWidths[col], fillChar);
             }
         }
     }
 
-    let result = '|' + table[0].join('|') + '|\n';
-    result += '|' + columnWidths.map(w => '-'.repeat(w)).join('|') + '|';
-
-    for (let i = 1; i < table.length; i++) {
-        result += '|' + table[i].join('|') + '|\n';
+    let lines = [];
+    for (let i = 0; i < table.length; i++) {
+        lines.push('|' + table[i].join('|') + '|');
     }
-    return result;
+
+    return lines.join('\n');
 }
