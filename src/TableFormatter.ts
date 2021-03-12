@@ -16,7 +16,7 @@ module.exports = {
 				let endLine = cursor.line;
 				while (!!cm.getLine(endLine) && cm.getLine(endLine).trimStart().charAt(0) === '|') endLine++;
 				
-				const formatted = formatTable(endLine - startLine, i => cm.getLine(i));
+				const formatted = formatTable(startLine, endLine - startLine, i => cm.getLine(i));
 				cm.replaceRange(formatted, {line: startLine, ch: 0}, {line: endLine, ch: 0})
             });
 		}

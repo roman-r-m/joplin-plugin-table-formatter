@@ -1,9 +1,9 @@
-export default function formatTable(numLines: number, getLine: (number) => string): string {
+export default function formatTable(startLine: number, numLines: number, getLine: (number) => string): string {
     const table = [];
     const columnWidths = [];
 
     for (let i = 0; i < numLines; i++) {
-        const line: string = getLine(i).trim();
+        const line: string = getLine(startLine + i).trim();
         let prev = 0;
         let cols = [];
         for (let j = 0; j < line.length; j++) {
@@ -22,7 +22,7 @@ export default function formatTable(numLines: number, getLine: (number) => strin
             if (j >= columnWidths.length) {
                 columnWidths.push(Math.max(3, cols[j].trim().length));
             } else {
-                columnWidths[j] = Math.max(3, columnWidths[i], cols[j].trim().length);
+                columnWidths[j] = Math.max(3, columnWidths[j], cols[j].trim().length);
             }
         }
     }
