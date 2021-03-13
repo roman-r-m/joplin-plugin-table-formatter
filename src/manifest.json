@@ -2,7 +2,7 @@
 	"manifest_version": 1,
 	"id": "net.rmusin.joplin-table-formatter",
 	"app_min_version": "1.8",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"name": "Table Formatter Plugin",
 	"description": "",
 	"author": "Roman Musin",
