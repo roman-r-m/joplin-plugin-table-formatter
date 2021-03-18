@@ -12,7 +12,7 @@ export default function formatTable(startLine: number, numLines: number, getLine
                 prev = j + 1;
             }
             if (j === line.length - 1) {
-                cols.push(line.substring(prev, j));
+                cols.push(line.slice(prev, j));
             }
         }
         
