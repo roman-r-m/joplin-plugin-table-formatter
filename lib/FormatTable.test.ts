@@ -6,11 +6,11 @@ function formatString(s: string) {
 }
 
 test('1 line 2 columns with equal widths', () => {
-  expect(formatString('| a | b |')).toBe(`|a  |b  |`);
+  expect(formatString('| a | b |')).toBe(`| a | b |`);
 });
 
 test('1 line 2 columns with unequal widths', () => {
-  expect(formatString('| a | bbbb |')).toBe(`|a  |bbbb|`);
+  expect(formatString('| a | bbbb |')).toBe(`| a | bbbb |`);
 });
 
 test('1 line 2 columns with unequal widths', () => {
@@ -18,9 +18,9 @@ test('1 line 2 columns with unequal widths', () => {
 |-|-|-|
 |aaa | b| cc   |`
 
-  expect(formatString(src)).toBe(`|a  |bb |ccc|
-|---|---|---|
-|aaa|b  |cc |`);
+  expect(formatString(src)).toBe(`| a   | bb | ccc |
+|-----|----|-----|
+| aaa | b  | cc  |`);
 });
 
 test('random error 1', () => {
@@ -28,7 +28,7 @@ test('random error 1', () => {
   |---|-----------|
   |      |long teeext|`
 
-  expect(formatString(src)).toBe(`|a  |ccc        |
-|---|-----------|
-|   |long teeext|`);
+  expect(formatString(src)).toBe(`| a | ccc         |
+|---|-------------|
+|   | long teeext |`);
 });

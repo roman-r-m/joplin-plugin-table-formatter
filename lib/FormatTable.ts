@@ -1,7 +1,11 @@
 const MIN_COLUMN_WIDTH = 3;
 
 function padCell(value: string, width: number, fillChar: string): string {
-    return value.padEnd(width, fillChar);
+    if (width > value.length) {
+        return (fillChar + value).padEnd(width, fillChar);
+    } else {
+        return value;
+    }
 }
 
 export default function formatTable(startLine: number, numLines: number, getLine: (number) => string): string {
@@ -24,11 +28,12 @@ export default function formatTable(startLine: number, numLines: number, getLine
         
         cols = cols.slice(1, cols.length - 1);
         table.push(cols.map(c => c.trim()));
+        const extraPad = (i == 1) ? 0 : 2;
         for (let j = 0; j < cols.length; j++) {
             if (j >= columnWidths.length) {
-                columnWidths.push(Math.max(MIN_COLUMN_WIDTH, cols[j].trim().length));
+                columnWidths.push(Math.max(MIN_COLUMN_WIDTH, extraPad + cols[j].trim().length));
             } else {
-                columnWidths[j] = Math.max(MIN_COLUMN_WIDTH, columnWidths[j], cols[j].trim().length);
+                columnWidths[j] = Math.max(MIN_COLUMN_WIDTH, columnWidths[j], extraPad + cols[j].trim().length);
             }
         }
     }
