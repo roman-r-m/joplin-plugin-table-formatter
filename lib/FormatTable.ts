@@ -1,3 +1,9 @@
+const MIN_COLUMN_WIDTH = 3;
+
+function padCell(value: string, width: number, fillChar: string): string {
+    return value.padEnd(width, fillChar);
+}
+
 export default function formatTable(startLine: number, numLines: number, getLine: (number) => string): string {
     const table = [];
     const columnWidths = [];
@@ -20,9 +26,9 @@ export default function formatTable(startLine: number, numLines: number, getLine
         table.push(cols.map(c => c.trim()));
         for (let j = 0; j < cols.length; j++) {
             if (j >= columnWidths.length) {
-                columnWidths.push(Math.max(3, cols[j].trim().length));
+                columnWidths.push(Math.max(MIN_COLUMN_WIDTH, cols[j].trim().length));
             } else {
-                columnWidths[j] = Math.max(3, columnWidths[j], cols[j].trim().length);
+                columnWidths[j] = Math.max(MIN_COLUMN_WIDTH, columnWidths[j], cols[j].trim().length);
             }
         }
     }
@@ -33,7 +39,7 @@ export default function formatTable(startLine: number, numLines: number, getLine
             if (col >= table[row].length) {
                 table[row].push(fillChar.repeat(columnWidths[col]))
             } else {
-                table[row][col] = (table[row][col] as string).padEnd(columnWidths[col], fillChar);
+                table[row][col] = padCell(table[row][col], columnWidths[col], fillChar);
             }
         }
     }
