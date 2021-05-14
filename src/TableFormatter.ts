@@ -1,31 +1,37 @@
-import { Editor } from "codemirror";
-import formatTable from "../lib/FormatTable";
+import {Editor} from 'codemirror'
+import formatTable from '../lib/FormatTable'
+import prettier from 'prettier'
 
 module.exports = {
-	default: function(_context: any) {
+  default: function (_context: any) {
 
-		const plugin = function(CodeMirror) {
-			CodeMirror.defineExtension('formatTable', function() {
-				const cm: Editor = this; // to get autocomplete working
+    const plugin = function (CodeMirror) {
+      CodeMirror.defineExtension('formatTable', function () {
+        const editor: Editor = this // to get autocomplete working
 
-				const cursor = cm.getCursor();
-				let startLine = cursor.line;
-				while (startLine >=0 && cm.getLine(startLine).trimStart().charAt(0) === '|') startLine--;
-				startLine++;
+        let parser = 'markdown' // for JS. Other values: json, typescript, css, scss, less, html (also for xml), yaml or php
 
-				let endLine = cursor.line;
-				while (!!cm.getLine(endLine) && cm.getLine(endLine).trimStart().charAt(0) === '|') endLine++;
-				
-				let formatted = formatTable(startLine, endLine - startLine, i => cm.getLine(i));
-				if (endLine < cm.lineCount()) {
-					formatted += '\n';
-				}
-				cm.replaceRange(formatted, {line: startLine, ch: 0}, {line: endLine, ch: 0})
-            });
-		}
+        const prettierVersion = prettier.formatWithCursor(
+          editor.getValue(),
+          {
+            parser: parser,
+            // plugins: prettierPlugins,
+            tabWidth: 2,
+            useTabs: false,
+            cursorOffset: editor.indexFromPos(editor.getCursor()),
+          },
+        )
 
-		return {
-			plugin: plugin,
+        editor.setValue(prettierVersion.formatted)
+
+        if (false === editor.somethingSelected()) {
+          editor.setCursor(editor.posFromIndex(prettierVersion.cursorOffset))
         }
+      })
     }
+
+    return {
+      plugin: plugin,
+    }
+  },
 }
