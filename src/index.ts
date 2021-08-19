@@ -12,5 +12,6 @@ joplin.plugins.register({
 			}
 		});
 		joplin.views.menuItems.create("Format Table", "formatTable", MenuItemLocation.Edit);
+		joplin.views.menuItems.create("Format Table", "formatTable", MenuItemLocation.EditorContextMenu);
 	},
 });
