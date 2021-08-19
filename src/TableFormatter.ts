@@ -1,5 +1,5 @@
 import { Editor } from "codemirror";
-import formatTable from "../lib/FormatTable";
+import { CliPrettify } from 'markdown-table-prettify';
 
 module.exports = {
 	default: function(_context: any) {
@@ -16,10 +16,8 @@ module.exports = {
 				let endLine = cursor.line;
 				while (!!cm.getLine(endLine) && cm.getLine(endLine).trimStart().charAt(0) === '|') endLine++;
 				
-				let formatted = formatTable(startLine, endLine - startLine, i => cm.getLine(i));
-				if (endLine < cm.lineCount()) {
-					formatted += '\n';
-				}
+				const table = cm.getRange({line: startLine, ch: 0}, {line: endLine, ch: 0});
+				const formatted = CliPrettify.prettify(table);
 				cm.replaceRange(formatted, {line: startLine, ch: 0}, {line: endLine, ch: 0})
             });
 		}
