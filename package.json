@@ -30,6 +30,6 @@
     "yargs": "^16.2.0"
   },
   "dependencies": {
-    "markdown-table-prettify": "^3.4.0"
+    "markdown-table-prettify": "^3.5.0"
   }
 }
