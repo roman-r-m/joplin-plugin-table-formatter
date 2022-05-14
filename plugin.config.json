@@ -1,5 +1,6 @@
 {
 	"extraScripts": [
-		"TableFormatter.ts"
+		"TableFormatter.ts",
+		"tableAutoFormatter/index.ts"
 	]
 }
