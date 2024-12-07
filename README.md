@@ -1,6 +1,32 @@
-# Joplin Plugin
+# Table Formatter
 
-This is a template to create a new Joplin plugin.
+## What this plugin does
+
+This plugin aligns the columns in the markdown version of your table. It will turn something like this
+
+```sh
+| city | capital of which state | Notes |
+|----------|-----------|--|
+| London | United Kingdom | very expensive |
+| Dublin | Ireland | just as expensive, without any of the perks |
+| Edinburgh | Scotland | -- |
+| Oslo | Norway | You can't afford to travel there |
+```
+
+into this
+
+```sh
+| city      | capital of     | Notes                                       |
+| --------- | -------------- | ------------------------------------------- |
+| London    | United Kingdom | very expensive                              |
+| Dublin    | Ireland        | just as expensive, without any of the perks |
+| Edinburgh | Scotland       | --                                          |
+| Oslo      | Norway         | You can't afford to travel there            |
+```
+
+To use, just select the table in the markdown, and right click to bring a context menu with the 'Format Table' command
+
+## Developer notes
 
 The main two files you will want to look at are:
 
